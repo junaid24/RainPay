@@ -20,7 +20,6 @@ const SliderText = props => {
     <View style={[styles.slider, props.containerStyle]}>
       <Text style={styles.dollar}>$</Text>
       <Text style={[styles.text, props.customCountStyle]}>{sliderValue}</Text>
-      {/* </View> */}
       <Slider
         style={[styles.slider, props.sliderStyle]}
         minimumValue={props.minimumValue || 0}

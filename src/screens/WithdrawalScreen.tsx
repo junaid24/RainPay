@@ -12,16 +12,7 @@ const WithdrawalScreen = ({navigation}) => {
       <Text style={styles.subtitle}>
         Link a debit card where you would like to receive your money.
       </Text>
-      <CardForm />
-      <TouchableOpacity
-        style={[
-          styles.buttonContainer,
-          {marginTop: 100, width: 327, marginLeft: 0},
-        ]}
-        activeOpacity={0.5}
-        onPress={() => navigation.navigate('Confirmation')}>
-        <Text style={styles.TextStyle}> Continue</Text>
-      </TouchableOpacity>
+      <CardForm navigation={navigation}/>
     </ScrollView>
   );
 };

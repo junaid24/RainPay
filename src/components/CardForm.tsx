@@ -6,14 +6,14 @@ import React, {useState} from 'react';
 import {Formik} from 'formik';
 import TextField from '../components/TextField';
 import {TouchableOpacity} from 'react-native';
+import styles from '../styles';
 
 const initialValues = {
   cardNumber: '',
   mmyy: '',
   cvv: '',
 };
-
-const CardForm: React.FC = () => {
+const CardForm = ({navigation}) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cvv, setCvv] = useState('');
@@ -39,26 +39,39 @@ const CardForm: React.FC = () => {
       }) => (
         <View>
           <TextField
-            style={styles.textField}
+            style={localStyles.textField}
             value={values.cardNumber}
             label="CARD NUMBER"
             onChangeText={handleChange('cardNumber')}
           />
           {errors.cardNumber ? <Text>Invalid Card Number </Text> : null}
           <TextField
-            style={styles.textField}
+            style={localStyles.textField}
             label="EXPIRATION DATE"
             value={values.mmyy}
             onChangeText={handleChange('mmyy')}
           />
           {errors.cardNumber ? <Text>Invalid Expiration Date</Text> : null}
           <TextField
-            style={styles.textField}
+            style={localStyles.textField}
             label="CVV"
             value={values.cvv}
             onChangeText={handleChange('cvv')}
           />
           {errors.cardNumber ? <Text>Invalid CVV </Text> : null}
+          <TouchableOpacity
+            style={[
+              styles.buttonContainer,
+              {marginTop: 100, width: 327, marginLeft: 0},
+            ]}
+            activeOpacity={0.5}
+            onPress={() => {
+              if (isValid && !isSubmitting) {
+                navigation.navigate('Confirmation');
+              }
+            }}>
+            <Text style={styles.TextStyle}> Continue</Text>
+          </TouchableOpacity>
         </View>
       )}
     </Formik>
@@ -92,7 +105,7 @@ export const CreateAccountFieldsSchema = Yup.object().shape({
     },
   ),
 });
-const styles = StyleSheet.create({
+const localStyles = StyleSheet.create({
   textField: {
     flex: 1,
     marginTop: 12,
